@@ -4,6 +4,8 @@ from manimlib.imports import *
 
 class Distributive(Scene):
     def construct(self):
+        title = TextMobject("Propiedad distributiva")
+        title.scale(2)
         squareB = Square()
         squareB.shift(LEFT * 1)
         squareC = Rectangle(height=2, width=3)
@@ -24,10 +26,15 @@ class Distributive(Scene):
         formula.next_to(groupB, DOWN, buff=1)
         formula.shift(RIGHT * 1)
         formula.scale(1.5)
+        self.play(Write(title))
+        self.wait()
+        self.play(FadeOutAndShift(title,direction=UP))
         self.play(Write(groupB))
         self.play(Write(groupC))
         self.play(Write(labelA))
         self.play(Write(formula[0]))
+        groupB = VGroup(squareB, labelB, labelA)
+        groupC = VGroup(squareC, labelC, labelA)
         self.play(ReplacementTransform(groupB.copy(), formula[1]))
         self.play(Write(formula[2]))
         self.play(ReplacementTransform(groupC.copy(), formula[3]))
